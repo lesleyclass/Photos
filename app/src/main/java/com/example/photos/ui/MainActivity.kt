@@ -3,11 +3,13 @@ package com.example.photos.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.photo.model.Photo
 import com.example.photos.R
 import com.example.photos.adapter.PhotoAdapter
 import com.example.photos.databinding.ActivityMainBinding
+import com.example.photos.model.Photo
+import com.example.photos.model.ServiceApi
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,5 +44,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        retrievePhotos()
+
     }
+
+    private fun retrievePhotos() =
+        ServiceApi.ProductListRequest(
+            { photoList ->
+                photoList.also {
+                    photoAdapter.addAll(it)
+                }
+            },
+            {
+                Toast.makeText(this, getString(R.string.request_problem), Toast.LENGTH_SHORT).show()
+            },
+        ).also { ServiceApi.getInstance(this).addToRequestQueue(it) }
 }

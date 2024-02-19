@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolbar"
         android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@color/design_default_color_primary"
         app:titleTextColor="@color/design_default_color_on_primary"
         app:subtitleTextColor="@color/design_default_color_on_primary"
